@@ -3,7 +3,7 @@
 
 ## Overview
 
-This is a Python implementation of the popular 2048 game using Pygame for the graphical interface. The goal of the game is to achieve highest score and tile possible with 0 undo. You can use the undo for practice. 
+This is a Python implementation of the popular 2048 game. The goal of the game is to achieve highest score and tile possible with 0 undo. You can use the undo for practice. 
 
 <img src="screenshot.png" alt="Screenshot" width="400">
 
@@ -25,7 +25,7 @@ This is a Python implementation of the popular 2048 game using Pygame for the gr
 
 ### Objective
 
-Slide the tiles on the board to combine them and create a tile with the number 2048. The game ends when no more moves are possible.
+Slide the tiles on the board to combine them and create a tile with the number 2048. The advanced players can keep going for 4096 and 8192. The game ends when no more moves are possible.
 
 ### Rules
 

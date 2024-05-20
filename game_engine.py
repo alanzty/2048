@@ -4,23 +4,6 @@ import random
 
 
 def generate_random_board():
-    high_values = [128, 256, 512, 1024, 2048]
-    low_values = [8, 16, 32, 64]
-
-    high_probabilities = [0.25, 0.25, 0.2, 0.15, 0.15]
-    low_probabilities = [0.4, 0.3, 0.2, 0.1]
-
-    high_probabilities = np.array(high_probabilities) / np.sum(high_probabilities)
-    low_probabilities = np.array(low_probabilities) / np.sum(low_probabilities)
-
-    board = np.zeros((4, 4), dtype=int)
-
-    for i in range(2):
-        for j in range(2):
-            board[i, j] = np.random.choice(high_values, p=high_probabilities)  # Top-left 2x2
-            board[2+i, 2+j] = np.random.choice(high_values, p=high_probabilities)  # Bottom-right 2x2
-            board[i, 2+j] = np.random.choice(low_values, p=low_probabilities)  # Top-right 2x2
-            board[2+i, j] = np.random.choice(low_values, p=low_probabilities)  # Bottom-left 2x2
 
     board = np.array([
         [2048, 2048, 32, 32],
@@ -45,7 +28,6 @@ class Game2048:
 
     def reset(self):
         self.board = np.zeros((self.size, self.size), dtype=int)
-        self.board = generate_random_board()
         self.add_tile()
         self.add_tile()
         return self.board
