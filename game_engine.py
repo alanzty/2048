@@ -2,6 +2,37 @@ import pygame
 import numpy as np
 import random
 
+
+def generate_random_board():
+    high_values = [128, 256, 512, 1024, 2048]
+    low_values = [8, 16, 32, 64]
+
+    high_probabilities = [0.25, 0.25, 0.2, 0.15, 0.15]
+    low_probabilities = [0.4, 0.3, 0.2, 0.1]
+
+    high_probabilities = np.array(high_probabilities) / np.sum(high_probabilities)
+    low_probabilities = np.array(low_probabilities) / np.sum(low_probabilities)
+
+    board = np.zeros((4, 4), dtype=int)
+
+    for i in range(2):
+        for j in range(2):
+            board[i, j] = np.random.choice(high_values, p=high_probabilities)  # Top-left 2x2
+            board[2+i, 2+j] = np.random.choice(high_values, p=high_probabilities)  # Bottom-right 2x2
+            board[i, 2+j] = np.random.choice(low_values, p=low_probabilities)  # Top-right 2x2
+            board[2+i, j] = np.random.choice(low_values, p=low_probabilities)  # Bottom-left 2x2
+
+    board = np.array([
+        [2048, 2048, 32, 32],
+        [2048, 2048, 32, 32],
+        [16, 16, 512, 512],
+        [16, 16, 512, 512]
+    ])
+
+    return board
+
+
+
 class Game2048:
     def __init__(self):
         self.size = 4
@@ -14,6 +45,7 @@ class Game2048:
 
     def reset(self):
         self.board = np.zeros((self.size, self.size), dtype=int)
+        self.board = generate_random_board()
         self.add_tile()
         self.add_tile()
         return self.board
@@ -89,6 +121,22 @@ class Game2048GUI:
         self.width = 1200
         self.height = 1200
         self.tile_size = self.width // self.size
+        # self.colors = {
+        #     0: (205, 193, 180),
+        #     2: (238, 228, 218),
+        #     4: (237, 224, 200),
+        #     8: (242, 177, 121),
+        #     16: (245, 149, 99),
+        #     32: (246, 124, 95),
+        #     64: (246, 94, 59),
+        #     128: (237, 207, 114),
+        #     256: (237, 204, 97),
+        #     512: (0, 128, 128),  # Updated color
+        #     1024: (0, 100, 128),  # Updated color
+        #     2048: (0, 76, 153),  # Updated color
+        #     4096: (0, 51, 102),  # Updated color
+        #     8192: (0, 25, 51),  # Updated color
+        # }
         self.colors = {
             0: (205, 193, 180),
             2: (238, 228, 218),
@@ -99,11 +147,9 @@ class Game2048GUI:
             64: (246, 94, 59),
             128: (237, 207, 114),
             256: (237, 204, 97),
-            512: (0, 128, 128),  # Updated color
-            1024: (0, 100, 128),  # Updated color
-            2048: (0, 76, 153),  # Updated color
-            4096: (0, 51, 102),  # Updated color
-            8192: (0, 25, 51),  # Updated color
+            512: (237, 200, 80),
+            1024: (237, 197, 63),
+            2048: (237, 194, 46),
         }
 
         pygame.init()

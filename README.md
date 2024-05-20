@@ -5,6 +5,8 @@
 
 This is a Python implementation of the popular 2048 game using Pygame for the graphical interface. The goal of the game is to achieve highest score and tile possible with 0 undo. You can use the undo for practice. 
 
+<img src="screenshot.png" alt="Screenshot" width="400">
+
 ## Installation
 
 1. **Install the required dependencies:**
