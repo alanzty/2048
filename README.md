@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-# 2048
-=======
-# 2048 Game - README
+
+# 2048 Game
 
 ## Overview
 
@@ -48,5 +46,3 @@ Slide the tiles on the board to combine them and create a tile with the number 2
 - **Undo Functionality:** Undo your last move with the Spacebar.
 - **Reset Functionality:** Reset the game with the R key.
 - **Game Over Detection:** The game will notify you when no more moves are possible.
-
->>>>>>> initial commit
