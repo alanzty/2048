@@ -1,6 +1,9 @@
+import os.path
+
 import pygame
 import numpy as np
 import random
+import pickle as pkl
 
 
 def generate_board():
@@ -33,8 +36,14 @@ class Game2048:
         self.undo_counts = 0
         self.reset()
 
+        if os.path.exists("save.pkl"):
+            with open("save.pkl", "rb") as f:
+                self.board, self.score, self.undo_counts = pkl.load(f)
+
     def reset(self):
         self.board = np.zeros((self.size, self.size), dtype=int)
+        self.score = 0
+        self.undo_counts = 0
         self.add_tile()
         self.add_tile()
         return self.board
@@ -102,6 +111,12 @@ class Game2048:
             self.board = self.board_hist[-1]
             self.board_hist = self.board_hist[:-1]
             self.undo_counts += 1
+
+
+    def save(self):
+        save_data = [self.board, self.score, self.undo_counts]
+        with open("save.pkl", "wb") as f:
+            pkl.dump(save_data, f)
 
 class Game2048GUI:
     def __init__(self, game):
@@ -171,7 +186,11 @@ class Game2048GUI:
                     elif event.key == pygame.K_ESCAPE:
                         running = False
                     elif event.key == pygame.K_r:
-                        game.__init__()
+                        game.reset()
+
+                    elif event.key == pygame.K_s:
+                        game.save()
+
                     if self.game.is_game_over():
                         # running = False
                         print("Game Over")
